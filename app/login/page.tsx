@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Loader2, Eye, EyeOff, Shield, Sparkles } from "lucide-react"
+import Image from "next/image";
+import logo from "@/public/logo.png"
 
 export default function LoginPage() {
   const [emailOrPhone, setEmailOrPhone] = useState("")
@@ -32,9 +34,7 @@ export default function LoginPage() {
         
         <div className="relative z-10 flex flex-col justify-center items-center text-white p-12 w-full">
           <div className="mb-8">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 mb-6">
-              {/* <Shield className="w-10 h-10 text-white" /> */}
-            </div>
+              <Image src={logo} alt="logo" className="w-20 h-20 rounded-lg border-white/20 mb-6" />
             <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
               Zefast Admin
             </h1>

@@ -15,6 +15,8 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { LogOut, User, Moon, Sun, Sparkles } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
+import Image from "next/image";
+import logo from "@/public/logo.png"
 
 export function DashboardHeader() {
   const logout = useLogout()
@@ -34,9 +36,7 @@ export function DashboardHeader() {
       <div className="flex h-20 items-center justify-between px-8">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-gradient-to-br from-primary to-accent shadow-lg shadow-primary/20">
-              {/* <Sparkles className="h-5 w-5 text-white" /> */}
-            </div>
+              <Image src={logo} alt="logo" className="rounded-lg h-15 w-auto"/>
             <div>
               <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 Zefast Admin
