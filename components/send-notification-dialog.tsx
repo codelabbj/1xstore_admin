@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Loader2 } from "lucide-react"
+import { Loader2, Search } from "lucide-react"
 
 interface SendNotificationDialogProps {
   open: boolean
@@ -34,6 +34,21 @@ export function SendNotificationDialog({ open, onOpenChange }: SendNotificationD
     content: "",
     user_id: "",
   })
+  const [searchTerm, setSearchTerm] = useState("")
+
+  // Filter users based on search term
+  const filteredUsers = botUsers?.filter((user) => {
+    const searchLower = searchTerm.toLowerCase()
+    const fullName = `${user.first_name} ${user.last_name}`.toLowerCase()
+    const email = (user.email || "").toLowerCase()
+    const telegramId = user.telegram_user_id.toLowerCase()
+    
+    return (
+      fullName.includes(searchLower) ||
+      email.includes(searchLower) ||
+      telegramId.includes(searchLower)
+    )
+  }) || []
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -42,6 +57,7 @@ export function SendNotificationDialog({ open, onOpenChange }: SendNotificationD
       onSuccess: () => {
         onOpenChange(false)
         setFormData({ title: "", content: "", user_id: "" })
+        setSearchTerm("")
       },
     })
   }
@@ -62,22 +78,44 @@ export function SendNotificationDialog({ open, onOpenChange }: SendNotificationD
                 <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
               </div>
             ) : (
-              <Select
-                value={formData.user_id}
-                onValueChange={(value) => setFormData({ ...formData, user_id: value })}
-                disabled={sendNotification.isPending}
-              >
-                <SelectTrigger id="user_id">
-                  <SelectValue placeholder="Choisir un utilisateur..." />
-                </SelectTrigger>
-                <SelectContent>
-                  {botUsers?.map((user) => (
-                    <SelectItem key={user.id} value={user.telegram_user_id}>
-                      {user.first_name} {user.last_name} ({user.email || 'Aucun email'})
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <>
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    type="text"
+                    placeholder="Rechercher un utilisateur par nom, email ou ID..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-9"
+                    disabled={sendNotification.isPending}
+                  />
+                </div>
+                <Select
+                  value={formData.user_id}
+                  onValueChange={(value) => {
+                    setFormData({ ...formData, user_id: value })
+                    setSearchTerm("") // Clear search after selection
+                  }}
+                  disabled={sendNotification.isPending}
+                >
+                  <SelectTrigger id="user_id">
+                    <SelectValue placeholder="Choisir un utilisateur..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {filteredUsers.length > 0 ? (
+                      filteredUsers.map((user) => (
+                        <SelectItem key={user.id} value={user.telegram_user_id}>
+                          {user.first_name} {user.last_name} ({user.email || 'Aucun email'})
+                        </SelectItem>
+                      ))
+                    ) : (
+                      <div className="px-2 py-6 text-center text-sm text-muted-foreground">
+                        Aucun utilisateur trouvé
+                      </div>
+                    )}
+                  </SelectContent>
+                </Select>
+              </>
             )}
           </div>
 
