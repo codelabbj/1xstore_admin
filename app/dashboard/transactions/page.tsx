@@ -67,6 +67,8 @@ export default function TransactionsPage() {
         return "Expiré"
       case "init_payment":
         return "En traitement"
+      case "error":
+        return "Erreur"
       default:
         return status
     }
@@ -84,6 +86,8 @@ export default function TransactionsPage() {
         return "outline" // Border only
       case "init_payment":
         return "secondary" // Gray/neutral (processing) - could also use a blue variant if available
+      case "error":
+        return "destructive" // Red (error)
       default:
         return "secondary" // Default fallback
     }
@@ -368,15 +372,19 @@ export default function TransactionsPage() {
                               <RefreshCw className="h-4 w-4 mr-1" />
                               Changer Statut
                             </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => handleProcessTransaction(transaction)}
-                              className="font-medium text-green-600 hover:text-green-700"
-                            >
-                              <RefreshCw className="h-4 w-4 mr-1" />
-                              Traiter
-                            </Button>
+                            {transaction.status === "pending" || transaction.status === "error" ? (
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => handleProcessTransaction(transaction)}
+                                className="font-medium text-green-600 hover:text-green-700"
+                              >
+                                <RefreshCw className="h-4 w-4 mr-1" />
+                                Traiter
+                              </Button>
+                            ) : (
+                              <span className="text-muted-foreground px-4">--------</span>
+                            )}
                             <Button
                               variant="ghost"
                               size="sm"
@@ -384,7 +392,7 @@ export default function TransactionsPage() {
                               className="font-medium text-purple-600 hover:text-purple-700"
                             >
                               <RefreshCw className="h-4 w-4 mr-1" />
-                              Update Statut
+                              Changement manuel du statut
                             </Button>
                           </div>
                         </TableCell>

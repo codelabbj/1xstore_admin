@@ -38,7 +38,7 @@ export interface Transaction {
   deposit_reward_amount: number | null
   reference: string
   type_trans: "deposit" | "withdrawal" | "reward"
-  status: "pending" | "accept" | "reject" | "timeout" | "init_payment"
+  status: "pending" | "accept" | "reject" | "timeout" | "init_payment" | "error"
   created_at: string
   validated_at: string | null
   webhook_data: any
