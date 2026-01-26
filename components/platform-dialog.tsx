@@ -363,6 +363,39 @@ export function PlatformDialog({ open, onOpenChange, platform }: PlatformDialogP
                                 disabled={isPending}
                             />
                         </div>
+
+                        <div className="space-y-2 md:col-span-2">
+                            <Label htmlFor="deposit_tuto_link">Lien tutoriel de dépôt (YouTube / Video)</Label>
+                            <Input
+                                id="deposit_tuto_link"
+                                placeholder="https://youtube.com/..."
+                                value={formData.deposit_tuto_link || ""}
+                                onChange={(e) => setFormData({ ...formData, deposit_tuto_link: e.target.value || null })}
+                                disabled={isPending}
+                            />
+                        </div>
+
+                        <div className="space-y-2 md:col-span-2">
+                            <Label htmlFor="withdrawal_tuto_link">Lien tutoriel de retrait (YouTube / Video)</Label>
+                            <Input
+                                id="withdrawal_tuto_link"
+                                placeholder="https://youtube.com/..."
+                                value={formData.withdrawal_tuto_link || ""}
+                                onChange={(e) => setFormData({ ...formData, withdrawal_tuto_link: e.target.value || null })}
+                                disabled={isPending}
+                            />
+                        </div>
+
+                        <div className="space-y-2 md:col-span-2">
+                            <Label htmlFor="why_withdrawal_fail">Raison de l'échec du retrait (YouTube / Video)</Label>
+                            <Input
+                                id="why_withdrawal_fail"
+                                placeholder="https://youtube.com/..."
+                                value={formData.why_withdrawal_fail || ""}
+                                onChange={(e) => setFormData({ ...formData, why_withdrawal_fail: e.target.value || null })}
+                                disabled={isPending}
+                            />
+                        </div>
                     </div>
 
                     <DialogFooter>
