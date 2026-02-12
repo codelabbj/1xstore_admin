@@ -172,13 +172,13 @@ export default function DashboardPage() {
                       {Object.entries(statistics.dashboard_stats.transactions_by_app).map(([app, data]) => (
                         <TableRow key={app}>
                           <TableCell className="font-medium">{app}</TableCell>
-                          <TableCell className="text-right">{data.deposit.count}</TableCell>
+                          <TableCell className="text-right">{data.deposit?.count ?? 0}</TableCell>
                           <TableCell className="text-right text-emerald-600 font-medium whitespace-nowrap">
-                            {formatNumber(data.deposit.total_amount)} FCFA
+                            {formatNumber(data.deposit?.total_amount ?? 0)} FCFA
                           </TableCell>
-                          <TableCell className="text-right">{data.withdrawal.count}</TableCell>
+                          <TableCell className="text-right">{data.withdrawal?.count ?? 0}</TableCell>
                           <TableCell className="text-right text-orange-600 font-medium whitespace-nowrap">
-                            {formatNumber(data.withdrawal.total_amount)} FCFA
+                            {formatNumber(data.withdrawal?.total_amount ?? 0)} FCFA
                           </TableCell>
                         </TableRow>
                       ))}

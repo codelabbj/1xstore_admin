@@ -92,7 +92,7 @@ export function FinalizeTransactionDialog({ open, onOpenChange, transaction }: F
                         <DialogFooter>
                             <Button type="submit" disabled={isPending}>
                                 {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                                Finaliser
+                                CRÉDITER L'UTILISATEUR
                             </Button>
                         </DialogFooter>
                     </form>
