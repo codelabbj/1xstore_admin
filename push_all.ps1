@@ -9,7 +9,7 @@ Write-Host "Pushing to all remotes..." -ForegroundColor Cyan
 Write-Host ""
 
 # List of remotes to push to
-$REMOTES = @("1xstore", "icash", "origin", "slater", "supercash")
+$REMOTES = @("1xstore", "icash", "origin", "slater", "supercash", "master")
 
 # Push to each remote
 foreach ($REMOTE in $REMOTES) {
@@ -17,9 +17,9 @@ foreach ($REMOTE in $REMOTES) {
     git push $REMOTE $CURRENT_BRANCH
     
     if ($LASTEXITCODE -eq 0) {
-        Write-Host "✓ Successfully pushed to $REMOTE" -ForegroundColor Green
+        Write-Host "[SUCCESS] Pushed to $REMOTE" -ForegroundColor Green
     } else {
-        Write-Host "✗ Failed to push to $REMOTE" -ForegroundColor Red
+        Write-Host "[FAILED] Could not push to $REMOTE" -ForegroundColor Red
     }
     Write-Host ""
 }
