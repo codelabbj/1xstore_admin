@@ -38,7 +38,7 @@ const navItems = [
   { href: "/dashboard/recharges", label: "Recharges", icon: CreditCard, feature: "RECHARGES" as const },
   { href: "/dashboard/bot-transactions", label: "Transactions Bot", icon: Bot, feature: "BOT_TRANSACTIONS" as const },
   { href: "/dashboard/platforms", label: "Plateformes", icon: Layers, feature: "PLATFORMS" as const },
-  { href: "/dashboard/deposits", label: "Dépôts & Caisses", icon: Wallet, feature: "DEPOSITS" as const },
+  { href: "/dashboard/deposits", label: "Caisses", icon: Wallet, feature: "DEPOSITS" as const },
   { href: "/dashboard/settings", label: "Paramètres", icon: Settings, feature: "SETTINGS" as const },
 ]
 
